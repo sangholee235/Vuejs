@@ -10,5 +10,7 @@ module.exports = {
   },
   rules: {
     "vue/no-multiple-template-root": "off", // 규칙 비활성화
+    "vue/multi-word-component-names": "off",
+    "vue/component-name-in-template-casing": ["error", "PascalCase"],
   },
 };

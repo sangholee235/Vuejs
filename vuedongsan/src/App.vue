@@ -1,39 +1,30 @@
 <template>
   <div>
-    <div>
-      <div class="black-bg" v-if="모달창열렸니 == true">
-        <div class="white-bg">
-          <h4>상세페이지</h4>
-          <p>상세페이지내용임</p>
-          <button @click="모달창열렸니 = false">닫기</button>
-        </div>
-      </div>
-    </div>
+    <Modal :products="products" :누른거="누른거" :모달창열렸니="모달창열렸니" />
 
     <div class="menu">
       <a v-for="작명 in 메뉴들" :key="작명">{{ 작명 }}</a>
     </div>
 
-    <div>
-      <img alt="Vue logo" src="./assets/logo.png" />
-      <div v-for="(a, i) in products" :key="i">
-        <img :src="products[i].image" class="room-img" />
-        <h4 @click="모달창열렸니 = true">{{ products[i].title }}</h4>
-        <p>{{ products[i].price }} 원</p>
-        <!-- <button @click="신고수[i]++">허위매물신고</button>
-        <span>신고수 : {{ 신고수[i] }}</span> -->
-      </div>
-    </div>
+    <Discount v-bind="오브젝트" />
+
+    <!-- props 나머지 내용 조금 & 저번 시간 숙제까지 수강함-->
+    <Card :product="products[i]" v-for="(작명, i) in products" :key="작명" />
   </div>
 </template>
 
 <script>
 import data from "./assets/oneroom.js";
+import Discount from "./Discount.vue";
+import Modal from "./Modal.vue";
+import Card from "./Card.vue";
 
 export default {
   name: "App",
   data() {
     return {
+      오브젝트: { name: "kim", age: 20 },
+      누른거: 0,
       모달창열렸니: false,
       // 신고수: [0, 0, 0],
       // price1: 70,
@@ -48,7 +39,11 @@ export default {
     },
   },
 
-  components: {},
+  components: {
+    Discount: Discount,
+    Modal: Modal,
+    Card: Card,
+  },
 };
 </script>
 
@@ -78,6 +73,7 @@ body {
 div {
   box-sizing: border-box;
 }
+
 .black-bg {
   width: 100%;
   height: 100%;
